@@ -203,6 +203,7 @@
             <id>production</id>
             <properties>
                 <vaadin.productionMode>true</vaadin.productionMode>
+                <activatedProperties>prod</activatedProperties>
             </properties>
 
             <dependencies>
