@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.vaadin.flow.helper.AsyncManager;
 import twitter4j.*;
+import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
 import java.net.URI;
@@ -157,6 +158,6 @@ public class StartView extends VerticalLayout {
      */
     private Twitter getTwitter() {
         Twitter twitter = VaadinSession.getCurrent().getAttribute(Twitter.class);
-        return twitter == null ? TwitterFactory.getSingleton() : twitter;
+        return twitter == null ? new TwitterFactory().getInstance() : twitter;
     }
 }
