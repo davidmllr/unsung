@@ -4,7 +4,8 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
 import com.vaadin.flow.server.VaadinSession;
-import de.berlin.htw.mueller.frontend.MainLayout;
+import de.berlin.htw.mueller.frontend.routes.MainLayout;
+import de.berlin.htw.mueller.frontend.routes.StartView;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
@@ -46,8 +47,9 @@ public class TwitterCallbackView extends VerticalLayout implements HasUrlParamet
     private void verify(String oauthVerifier) throws TwitterException {
         Twitter twitter = VaadinSession.getCurrent().getAttribute(Twitter.class);
         twitter.getOAuthAccessToken(oauthVerifier);
+        VaadinSession.getCurrent().setAttribute("authorize.action", false);
         VaadinSession.getCurrent().setAttribute("twitter.requestToken", null);
         VaadinSession.getCurrent().setAttribute("twitter.authorized", true);
-        UI.getCurrent().getPage().setLocation("start");
+        UI.getCurrent().access(() -> UI.getCurrent().navigate(StartView.class));
     }
 }

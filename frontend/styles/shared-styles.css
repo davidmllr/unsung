@@ -33,6 +33,13 @@ footer vaadin-button {
   color: var(--primary-contrast-color);
 }
 
+img.application-logo {
+  width: 50vw;
+  margin: 20px;
+  border-bottom: 2px solid var(--material-primary-color);
+  padding: 5px;
+}
+
 #start-button {
   color: #FDECEF;
   background: var(--material-primary-color);

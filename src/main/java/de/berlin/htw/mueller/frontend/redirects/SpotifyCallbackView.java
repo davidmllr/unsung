@@ -3,12 +3,14 @@ package de.berlin.htw.mueller.frontend.redirects;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
+import com.vaadin.flow.server.VaadinSession;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.credentials.AuthorizationCodeCredentials;
 import com.wrapper.spotify.requests.authorization.authorization_code.AuthorizationCodeRequest;
 import de.berlin.htw.mueller.backend.spotify.Spotify;
-import de.berlin.htw.mueller.frontend.MainLayout;
+import de.berlin.htw.mueller.frontend.routes.MainLayout;
+import de.berlin.htw.mueller.frontend.routes.StartView;
 import org.apache.hc.core5.http.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -54,7 +56,8 @@ public class SpotifyCallbackView extends VerticalLayout implements HasUrlParamet
             spotifyApi.setRefreshToken(authorizationCodeCredentials.getRefreshToken());
 
             System.out.println("Expires in: " + authorizationCodeCredentials.getExpiresIn());
-            UI.getCurrent().getPage().setLocation("start");
+            VaadinSession.getCurrent().setAttribute("authorize.action", true);
+            UI.getCurrent().access(() -> UI.getCurrent().navigate(StartView.class));
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
         }

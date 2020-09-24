@@ -1,4 +1,4 @@
-package de.berlin.htw.mueller.frontend;
+package de.berlin.htw.mueller.frontend.routes;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -18,6 +18,7 @@ import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.PageConfigurator;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.material.Material;
+import de.berlin.htw.mueller.frontend.routes.SongView;
 
 /**
  * A sample Vaadin view class.

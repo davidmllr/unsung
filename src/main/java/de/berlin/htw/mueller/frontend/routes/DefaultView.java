@@ -1,4 +1,4 @@
-package de.berlin.htw.mueller.frontend;
+package de.berlin.htw.mueller.frontend.routes;
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterEvent;
@@ -9,6 +9,6 @@ import com.vaadin.flow.router.Route;
 public class DefaultView extends VerticalLayout implements BeforeEnterObserver {
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        event.rerouteTo(StartView.class);
+        event.forwardTo(StartView.class);
     }
 }

@@ -1,4 +1,4 @@
-package de.berlin.htw.mueller.frontend;
+package de.berlin.htw.mueller.frontend.routes;
 
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.UI;
@@ -10,8 +10,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
 import com.wrapper.spotify.model_objects.specification.AudioFeatures;
