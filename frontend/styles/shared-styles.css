@@ -1,0 +1,156 @@
+html {
+  --material-background-color: #fff;
+  --material-secondary-background-color: #f5f5f5;
+  --material-body-text-color: rgba(0, 0, 0, 0.87);
+  --material-secondary-text-color: rgba(0, 0, 0, 0.54);
+  --material-disabled-text-color: rgba(0, 0, 0, 0.38);
+  --material-primary-text-color: palevioletred;
+  --material-error-text-color: #b00020;
+  --material-primary-color: palevioletred;
+  --material-primary-contrast-color: #fff;
+  --material-error-color: #b00020;
+  --primary-contrast-color: #FDECEF;
+}
+
+.view {
+  margin-bottom: 7vh;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var( --material-primary-color);
+  height: 7vh;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+footer vaadin-button {
+  color: var(--primary-contrast-color);
+}
+
+#start-button {
+  color: #FDECEF;
+  background: var(--material-primary-color);
+  width: 90%;
+}
+
+#recommendation-types-select {
+  width: 90%;
+}
+
+.analysis-div {
+  background: var(--material-primary-color);
+  color: var(--primary-contrast-color);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+}
+
+.analysis-div div * {
+  padding: 0 5px;
+}
+
+.analysis-div .left {
+  display: block;
+  border-right: 1px solid var(--primary-contrast-color);
+}
+
+.analysis-div div {
+   display: flex;
+   justify-content: space-between;
+}
+
+.analysis-div label {
+  font-weight: bold;
+}
+
+.analysis-div vaadin-button {
+  color: var(--primary-contrast-color);
+}
+
+.song-explanation {
+  padding: 5px;
+}
+
+.tweet-grid {
+  width: 90%;
+  display: grid;
+  overflow-y: scroll;
+}
+
+tweet-presenter {
+  position: relative;
+}
+
+.tweet-container {
+  opacity: 0.3;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.tweet-overlay {
+  position: absolute;
+  opacity: 1.0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.tweet-icon-group {
+  transition: .5s ease;
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  width: 80%;
+  z-index: 2;
+}
+
+.tweet-sentiment-details {
+  transition: .5s ease;
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  padding: 0 10px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  background: var(--primary-contrast-color);
+  z-index: 3;
+}
+
+.tweet-clickable-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--primary-contrast-color);
+  background: #9D6381;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.tweet-clickable-icon:active {
+  background: darkgray;
+}
+
+.explanation-paragraph {
+  display: grid;
+}
+
+.explanation-paragraph label {
+  font-weight: bold;
+}
+
