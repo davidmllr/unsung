@@ -80,7 +80,7 @@ public class SongView extends VerticalLayout {
         if (result.getMixed() > 0.0f)
             str += MessageFormat.format(" ({3,number} tweets sent mixed messages.)", result.getMixed());
 
-        String other = MessageFormat.format("Based on this, we figured you might like a song that is at least {0,number,#.##%} valent, {1,number,#.##%} danceable and has at least {2,number,#.##%} energy.",
+        String other = MessageFormat.format("Based on this, we figured you might like a song that is about {0,number,#.##%} valent, {1,number,#.##%} danceable and has around {2,number,#.##%} energy.",
                 result.getPositiveRatio(), result.getNegativeRatio(), result.getNeutralRatio(), result.getMixedRatio());
         String cheerStr = "Because we want to cheer you up, we were looking for a song which has a high valency, danceability and energy.";
         Button explButton = new Button(VaadinIcon.QUESTION_CIRCLE_O.create(), e -> explanationDialog.open());
