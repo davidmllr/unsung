@@ -1,6 +1,7 @@
 package de.berlin.htw.mueller.frontend;
 
 import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
@@ -9,6 +10,8 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
 import com.wrapper.spotify.model_objects.specification.AudioFeatures;
@@ -44,6 +47,19 @@ public class SongView extends VerticalLayout {
         final Interpretation interpretation =
                 VaadinSession.getCurrent().getAttribute(Interpretation.class);
 
+        if(interpretation == null) {
+            UI.getCurrent().access(() -> UI.getCurrent().navigate(StartView.class));
+            this.id = null;
+            this.features = null;
+            this.result = null;
+            this.analyses = null;
+            this.isCheerUp = false;
+            this.player = null;
+            this.layout = null;
+            this.explanationDialog = null;
+            return;
+        }
+
         this.id = interpretation.getId();
         this.features = interpretation.getFeatures();
         this.result = interpretation.getResult();
@@ -60,10 +76,10 @@ public class SongView extends VerticalLayout {
             analysisDiv.setVisible(!analysisDiv.isVisible());
         });
 
-        String str = MessageFormat.format( "Out of your last twenty tweets and/or retweets, {0,number} tweets were positive, {1,number} were negative and {2,number} were neutral.",
+        String str = MessageFormat.format("Out of your last twenty tweets and/or retweets, {0,number} tweets were positive, {1,number} were negative and {2,number} were neutral.",
                 result.getPositive(), result.getNegative(), result.getNeutral());
 
-        if(result.getMixed() > 0.0f)
+        if (result.getMixed() > 0.0f)
             str += MessageFormat.format(" ({3,number} tweets sent mixed messages.)", result.getMixed());
 
         String other = MessageFormat.format("Based on this, we figured you might like a song that is at least {0,number,#.##%} valent, {1,number,#.##%} danceable and has at least {2,number,#.##%} energy.",
@@ -83,7 +99,7 @@ public class SongView extends VerticalLayout {
         Tabs tabs = new Tabs(explanationTab, detailsTab);
         tabs.setSelectedTab(explanationTab);
         tabs.addSelectedChangeListener(e -> {
-            if(e.getSelectedTab().equals(detailsTab)) {
+            if (e.getSelectedTab().equals(detailsTab)) {
                 player.setHeight(80);
                 layout.getStyle().remove("display");
                 layout.setVisible(true);
@@ -108,7 +124,6 @@ public class SongView extends VerticalLayout {
     }
 
     /**
-     *
      * @return
      */
     private Dialog createExplanationDialog() {
@@ -120,4 +135,5 @@ public class SongView extends VerticalLayout {
         layout.setHeight("50vh");
         return new Dialog(layout);
     }
+
 }

@@ -3,6 +3,8 @@ package de.berlin.htw.mueller.frontend;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.router.Route;
@@ -49,6 +51,9 @@ public class StartView extends VerticalLayout {
         this.twitter = getTwitter();
         this.spotify = spotify;
 
+        Object obj = VaadinSession.getCurrent().getAttribute("authorize.action");
+        if(obj != null && (Boolean) obj) authorizeTwitter();
+
         setWidthFull();
         setHeightFull();
         setJustifyContentMode(JustifyContentMode.CENTER);
@@ -62,6 +67,9 @@ public class StartView extends VerticalLayout {
 
         Checkbox cheerBox = new Checkbox("Cheer Me Up!");
         cheerBox.setId("cheer-up-checkbox");
+
+        Image logo = new Image("img/logo.png", "Application Logo");
+        logo.setClassName("application-logo");
 
         Button button = new Button("Find A Song", e -> {
             if (!authorizeSpotify() || !authorizeTwitter())
@@ -90,7 +98,7 @@ public class StartView extends VerticalLayout {
             });
         });
         button.setId("start-button");
-        add(button, recommendTypes, cheerBox);
+        add(logo, button, recommendTypes, cheerBox);
     }
 
     private void buildSong(String id,
