@@ -17,6 +17,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * This component acts as a direct connection to the Azure Text Analytics API.
+ * It stores all the relevant information for authenticating.
+ */
 @Component
 @Scope("singleton")
 public class TextAnalyzer {
@@ -32,7 +36,7 @@ public class TextAnalyzer {
     private final Logger logger = LoggerFactory.getLogger(TextAnalyzer.class);
 
     /**
-     *
+     * Initializes the Java Client for the API by using the given key and endpoint.
      */
     @PostConstruct
     public void init() {
@@ -43,7 +47,9 @@ public class TextAnalyzer {
     }
 
     /**
-     * @param document
+     * Calculates a sentiment for a given document.
+     * @param document is the String to be analyzed.
+     * @return a sentiment for the given document.
      */
     @Nullable
     public DocumentSentiment getSentiment(String document) {
@@ -57,9 +63,9 @@ public class TextAnalyzer {
     }
 
     /**
-     *
-     * @param document
-     * @return
+     * Calculates key phrases for a given document.
+     * @param document is the String to be analyzed.
+     * @return key phrases for the given document.
      */
     @Nullable
     public KeyPhrasesCollection getKeyPhrases(String document) {
@@ -68,9 +74,9 @@ public class TextAnalyzer {
     }
 
     /**
-     *
-     * @param document
-     * @return
+     * Calculates categorized entities for a given document.
+     * @param document is the String to be analyzed.
+     * @return categorized entities for the given document.
      */
     @Nullable
     public CategorizedEntityCollection getEntities(String document) throws TextAnalyticsException {

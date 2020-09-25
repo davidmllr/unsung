@@ -11,14 +11,17 @@ import com.wrapper.spotify.model_objects.specification.AudioFeatures;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+/**
+ * Container which presents audio features to the user.
+ */
 public class AnalysisDiv extends Div {
     private final AudioFeatures features;
     private final Dialog explanationDialog;
 
     /**
-     *
-     * @param features
-     * @param explanationDialog
+     * Basic constructor for the container.
+     * @param features are the given audio features.
+     * @param explanationDialog is an dialog holding explanations of the features.
      */
     public AnalysisDiv(AudioFeatures features, Dialog explanationDialog) {
 
@@ -40,9 +43,9 @@ public class AnalysisDiv extends Div {
 
 
     /**
-     *
-     * @param value
-     * @param locale
+     * Converts an numeric value to a percentage.
+     * @param value is a numeric value.
+     * @param locale is a locale which is used to calculate the percentage.
      * @return
      */
     public static String percentage(double value, Locale locale) {

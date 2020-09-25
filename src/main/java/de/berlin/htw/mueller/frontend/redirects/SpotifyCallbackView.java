@@ -18,16 +18,29 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This view is used as a callback for Spotify authentication.
+ */
 @Route(value = "spotify/callback", layout = MainLayout.class)
 public class SpotifyCallbackView extends VerticalLayout implements HasUrlParameter<String> {
 
     private final SpotifyApi spotifyApi;
 
+    /**
+     * Basic constructor that initializes the view.
+     * @param spotify is a reference to the Spotify component.
+     */
     @Autowired
     public SpotifyCallbackView(Spotify spotify) {
         this.spotifyApi = spotify.getApi();
     }
 
+    /**
+     * When this view is called by the Spotify authorization process, its parameters are used to extract an authorization code
+     * and perform the authorization.
+     * @param event is an event that handles navigation for the user.
+     * @param parameter are the URL parameters used to open this view.
+     */
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
 
@@ -43,10 +56,14 @@ public class SpotifyCallbackView extends VerticalLayout implements HasUrlParamet
 
         final AuthorizationCodeRequest request = spotifyApi.authorizationCode(code)
                 .build();
-        authorize(request, event);
+        authorize(request);
     }
 
-    private void authorize(AuthorizationCodeRequest request, BeforeEvent event) {
+    /**
+     * Authorizes a user by using the given request.
+     * @param request is the given authorization request.
+     */
+    private void authorize(AuthorizationCodeRequest request) {
         try {
 
             final AuthorizationCodeCredentials authorizationCodeCredentials = request.execute();

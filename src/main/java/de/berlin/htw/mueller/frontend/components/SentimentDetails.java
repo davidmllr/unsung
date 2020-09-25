@@ -8,9 +8,17 @@ import com.vaadin.flow.component.html.Div;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents a container which is used as a tweet overlay.
+ * It shows the given sentiment and its probability.
+ */
 public class SentimentDetails extends Div {
     private final DocumentSentiment sentiment;
 
+    /**
+     * Basic constructor for the container.
+     * @param sentiment is the given sentiment.
+     */
     public SentimentDetails(DocumentSentiment sentiment) {
         this.sentiment = sentiment;
         setClassName("tweet-sentiment-details");
@@ -22,8 +30,7 @@ public class SentimentDetails extends Div {
     }
 
     /**
-     *
-     * @return
+     * @return the highest confidence score for the given sentiment.
      */
     private double getHighestConfidenceScore() {
         if(sentiment == null)

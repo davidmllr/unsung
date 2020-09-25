@@ -30,6 +30,11 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * A view which shows basic interaction possibilities to the user.
+ * A user can start the recommendation process and decides about two parameters:
+ * a cheer-up-option as well as a personal or a genre based recommendation.
+ */
 @Route(value = "start", layout = MainLayout.class)
 public class StartView extends VerticalLayout {
 
@@ -42,6 +47,11 @@ public class StartView extends VerticalLayout {
 
     private final Logger logger = LoggerFactory.getLogger(StartView.class);
 
+    /**
+     * Basic constructor for the view.
+     * @param processor is a reference to the Processor component.
+     * @param spotify is a reference to the Spotify component.
+     */
     @Autowired
     public StartView(Processor processor,
                      Spotify spotify) {
@@ -99,6 +109,14 @@ public class StartView extends VerticalLayout {
         add(logo, button, recommendTypes, cheerBox);
     }
 
+    /**
+     * When an interpretation is done, this function is used to transfer it to the SongView.
+     * @param id is the id for the calculated song.
+     * @param features are the calculated audio features.
+     * @param result is the result for the analyses.
+     * @param analyses is a list of analyses.
+     * @param isCheerUp is an indicator if the user wants to be cheered up by the recommendation.
+     */
     private void buildSong(String id,
                            AudioFeatures features,
                            Processor.Result result,
@@ -111,7 +129,7 @@ public class StartView extends VerticalLayout {
     }
 
     /**
-     *
+     * Starts the Spotify authorization process if it has not happened yet.
      */
     private boolean authorizeSpotify() {
 
@@ -130,7 +148,7 @@ public class StartView extends VerticalLayout {
     }
 
     /**
-     *
+     * Starts the Twitter authorization process if it has not happened yet.
      */
     private boolean authorizeTwitter() {
         if(isTwitterAuthorized()) {
@@ -152,7 +170,7 @@ public class StartView extends VerticalLayout {
 
 
     /**
-     * @return
+     * @return an indicator if Twitter is already authorized.
      */
     private Boolean isTwitterAuthorized() {
         Object authorized = VaadinSession.getCurrent().getAttribute("twitter.authorized");
@@ -160,7 +178,7 @@ public class StartView extends VerticalLayout {
     }
 
     /**
-     * @return
+     * @return a reference to Twitter.
      */
     private Twitter getTwitter() {
         Twitter twitter = VaadinSession.getCurrent().getAttribute(Twitter.class);

@@ -25,6 +25,9 @@ import de.berlin.htw.mueller.frontend.helpers.Interpretation;
 import java.text.MessageFormat;
 import java.util.List;
 
+/**
+ * A view which presents a song, which was determined by a recommendation process based on their tweets, to the user.
+ */
 @Route(value = "song", layout = MainLayout.class)
 public class SongView extends VerticalLayout {
 
@@ -38,6 +41,9 @@ public class SongView extends VerticalLayout {
     private final Div layout;
     private final Dialog explanationDialog;
 
+    /**
+     * Basic constructor for the view.
+     */
     public SongView() {
 
         setClassName("view");
@@ -122,7 +128,7 @@ public class SongView extends VerticalLayout {
     }
 
     /**
-     * @return
+     * @return a dialog which contains explanations about audio features.
      */
     private Dialog createExplanationDialog() {
         VerticalLayout layout = new VerticalLayout(

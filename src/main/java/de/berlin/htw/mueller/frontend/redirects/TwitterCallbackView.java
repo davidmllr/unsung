@@ -12,9 +12,18 @@ import twitter4j.TwitterException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This view is used as a callback for Twitter authentication.
+ */
 @Route(value = "twitter/callback", layout = MainLayout.class)
 public class TwitterCallbackView extends VerticalLayout implements HasUrlParameter<String> {
 
+    /**
+     * When this view is called by the Twitter authorization process, its parameters are used to extract an OAuth token and OAuth verifier
+     * and perform the authorization.
+     * @param event is an event that handles navigation for the user.
+     * @param parameter are the URL parameters used to open this view.
+     */
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
 
@@ -40,8 +49,8 @@ public class TwitterCallbackView extends VerticalLayout implements HasUrlParamet
     }
 
     /**
-     *
-     * @param oauthVerifier
+     * Verifies the fiven OAuth verifier and performs the authorization for a given user.
+     * @param oauthVerifier is the given OAuth verifier.
      * @throws TwitterException
      */
     private void verify(String oauthVerifier) throws TwitterException {

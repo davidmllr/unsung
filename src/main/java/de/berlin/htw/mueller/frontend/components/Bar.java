@@ -5,6 +5,9 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 
+/**
+ * Represents a small dialog with a progress bar and explanation of the current process.
+ */
 public class Bar extends Dialog {
 
     private final Div div;
@@ -12,9 +15,9 @@ public class Bar extends Dialog {
     private final ProgressBar progressBar;
 
     /**
-     *
-     * @param min
-     * @param max
+     * Basic constructor for the progress bar container.
+     * @param min is the minimum value for the progress bar.
+     * @param max is the maximum value for the progress bar.
      */
     public Bar(double min, double max) {
         super();
@@ -35,67 +38,19 @@ public class Bar extends Dialog {
     }
 
     /**
-     *
+     *  Basic constructor without parameters.
      */
     public Bar() {
         this(0, 100);
     }
 
     /**
-     *
-     * @param min
-     */
-    public void setMin(double min) {
-        progressBar.setMin(min);
-    }
-
-    /**
-     *
-     * @param max
-     */
-    public void setMax(double max) {
-        progressBar.setMax(max);
-    }
-
-    /**
-     *
-     * @param text
-     */
-    public void setLabel(String text) {
-        label.setText(text);
-    }
-
-    /**
-     *
-     * @param text
-     * @param value
+     * Sets a label text as well as current progress.
+     * @param text is a label to be used.
+     * @param value is the current progress.
      */
     public void set(String text, double value) {
         label.setText(text);
         progressBar.setValue(value);
-    }
-
-    /**
-     *
-     */
-    public void increment() {
-        double value = progressBar.getValue();
-        progressBar.setValue(value+1);
-    }
-
-    /**
-     *
-     * @param value
-     */
-    public void setProgress(double value) {
-        progressBar.setValue(value);
-    }
-
-    /**
-     *
-     * @return
-     */
-    public double getProgress() {
-        return progressBar.getValue();
     }
 }

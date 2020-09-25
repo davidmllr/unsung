@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Processor is a Spring Component that acts as a simple service for using the Azure Text Analytics API.
+ */
 @Component
 public class Processor {
 
@@ -21,8 +24,8 @@ public class Processor {
     private final Logger logger = LoggerFactory.getLogger(Processor.class);
 
     /**
-     *
-     * @param textAnalyzer
+     * Basic constructor.
+     * @param textAnalyzer is the class that is directly connected to Azure.
      */
     @Autowired
     public Processor(TextAnalyzer textAnalyzer) {
@@ -30,9 +33,9 @@ public class Processor {
     }
 
     /**
-     *
-     * @param states
-     * @return
+     * Performs analyses for the given tweets.
+     * @param states represent a list of tweets.
+     * @return a list of analyses.
      */
     public List<Analysis> analyze(List<Status> states) {
         return states.stream()
@@ -51,9 +54,9 @@ public class Processor {
     }
 
     /**
-     *
-     * @param analyses
-     * @return
+     * Interprets a given list of analyses by adding up the respective sentiments.
+     * @param analyses are a list of given analyses that have been processed by analyze() before.
+     * @return a result for the interpretation.
      */
     public Result interpret(List<Analysis> analyses) {
         float positive = 0, negative = 0, neutral = 0, mixed = 0;
@@ -77,7 +80,7 @@ public class Processor {
     }
 
     /**
-     *
+     * A simple POJO that holds the result for an interpretation of analyses.
      */
     public class Result {
         private float positive;
@@ -86,11 +89,11 @@ public class Processor {
         private float mixed;
 
         /**
-         *
-         * @param positive
-         * @param negative
-         * @param neutral
-         * @param mixed
+         * A basic constructor for a Result.
+         * @param positive is the number of positive sentiments.
+         * @param negative is the number of negative sentiments.
+         * @param neutral is the number of neutral sentiments.
+         * @param mixed is the number of mixed sentiments.
          */
         public Result(float positive, float negative, float neutral, float mixed) {
             this.positive = positive;
@@ -101,7 +104,7 @@ public class Processor {
 
         /**
          *
-         * @return
+         * @return the total number of sentiments.
          */
         public float total() {
             return positive + negative + neutral + mixed;
@@ -109,7 +112,7 @@ public class Processor {
 
         /**
          *
-         * @return
+         * @return the number of positive sentiments divided by the number of total sentiments.
          */
         public float getPositiveRatio() {
             return positive/total();
@@ -117,7 +120,7 @@ public class Processor {
 
         /**
          *
-         * @return
+         * @return the number of negative sentiments divided by the number of total sentiments.
          */
         public float getNegativeRatio() {
             return negative/total();
@@ -125,7 +128,7 @@ public class Processor {
 
         /**
          *
-         * @return
+         * @return the number of neutral sentiments divided by the number of total sentiments.
          */
         public float getNeutralRatio() {
             return neutral/total();
@@ -133,16 +136,15 @@ public class Processor {
 
         /**
          *
-         * @return
+         * @return the number of mixed sentiments divided by the number of total sentiments.
          */
         public float getMixedRatio() {
             return mixed/total();
         }
 
-
         /**
          *
-         * @return
+         * @return the number of positive sentiments.
          */
         public float getPositive() {
             return positive;
@@ -150,7 +152,7 @@ public class Processor {
 
         /**
          *
-         * @return
+         * @return the number of negative sentiments.
          */
         public float getNegative() {
             return negative;
@@ -158,7 +160,7 @@ public class Processor {
 
         /**
          *
-         * @return
+         * @return the number of neutral sentiments.
          */
         public float getNeutral() {
             return neutral;
@@ -166,7 +168,7 @@ public class Processor {
 
         /**
          *
-         * @return
+         * @return the number of mixed sentiments.
          */
         public float getMixed() {
             return mixed;

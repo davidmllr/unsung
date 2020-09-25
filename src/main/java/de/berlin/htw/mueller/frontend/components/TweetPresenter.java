@@ -15,6 +15,11 @@ import twitter4j.Status;
 
 import java.util.Objects;
 
+/**
+ * A component which presents a tweet to the user.
+ * The tweet is covered by an overlay and two icons.
+ * The left icon shows the sentiment while the right icon can be used to be forwarded to the original tweet.
+ */
 @Tag("tweet-presenter")
 public class TweetPresenter extends Component implements HasComponents {
 
@@ -63,9 +68,9 @@ public class TweetPresenter extends Component implements HasComponents {
     }
 
     /**
-     *
-     * @param documentSentiment
-     * @return
+     * Calculates an icon for a given sentiment.
+     * @param documentSentiment is a given sentiment.
+     * @return an icon.
      */
     private Icon getIconForSentiment(DocumentSentiment documentSentiment) {
         TextSentiment sentiment = documentSentiment.getSentiment();

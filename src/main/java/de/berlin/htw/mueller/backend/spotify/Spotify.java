@@ -23,6 +23,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This class is used to interact with the Spotify API.
+ * It handles authentication, authorization and basic requests for the application.
+ * It's scope is limited to a session to make sure all users are authenticated separately.
+ */
 @Component
 @Scope(value="session")
 public class Spotify {
@@ -40,6 +45,9 @@ public class Spotify {
 
     private final Logger logger = LoggerFactory.getLogger(Spotify.class);
 
+    /**
+     * Initializes the Spotify API as an object.
+     */
     @PostConstruct
     public void init() {
         final URI uri = SpotifyHttpManager.makeUri(redirectUri);
@@ -52,15 +60,15 @@ public class Spotify {
 
     /**
      *
-     * @return
+     * @return the Spotify API as an object.
      */
     public SpotifyApi getApi() {
         return spotifyApi;
     }
 
     /**
-     *
-     * @return
+     * Creates a new authorization request for a user.
+     * @return the URI for the authorization request.
      */
     public URI authorize() {
         final AuthorizationCodeUriRequest request = spotifyApi.authorizationCodeUri()
@@ -71,16 +79,19 @@ public class Spotify {
     }
 
     /**
-     * @return
+     * Executes a given authorization request.
+     * @param request is a given authorization request.
+     * @return the URI for the authorization request.
      */
     private URI authorize(AuthorizationCodeUriRequest request) {
         return request.execute();
     }
 
     /**
-     *
-     * @param result
-     * @return
+     * Returns a song recommendation for a given user by using their top songs.
+     * @param result is the result returned by the analysis and interpretation of tweets.
+     * @param isCheerUp is an indicator if the user wants to be cheered up by the recommendation.
+     * @return the id of the recommended song.
      * @throws ParseException
      * @throws SpotifyWebApiException
      * @throws IOException
@@ -104,9 +115,11 @@ public class Spotify {
     }
 
     /**
-     *
-     * @param result
-     * @return
+     * Returns a song recommendation based on a given genre.
+     * @param result is the result returned by the analysis and interpretation of tweets.
+     * @param isCheerUp is an indicator if the user wants to be cheered up by the recommendation.
+     * @param genre is the String representation of a given genre.
+     * @return the id of the recommended song.
      * @throws ParseException
      * @throws SpotifyWebApiException
      * @throws IOException
@@ -128,8 +141,8 @@ public class Spotify {
     }
 
     /**
-     *
-     * @return
+     * Calculates seeds for the recommendation process by looking at the top songs of the authenticated user.
+     * @return an array of song IDs that are within the authenticated user's top songs.
      * @throws ParseException
      * @throws SpotifyWebApiException
      * @throws IOException
@@ -146,9 +159,9 @@ public class Spotify {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Requests audio features for a given track.
+     * @param id of a given track.
+     * @return list of audio features returned by the API.
      * @throws ParseException
      * @throws SpotifyWebApiException
      * @throws IOException

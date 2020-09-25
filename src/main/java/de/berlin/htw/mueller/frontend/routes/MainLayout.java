@@ -12,25 +12,20 @@ import com.vaadin.flow.component.page.History;
 import com.vaadin.flow.component.page.LoadingIndicatorConfiguration;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
-import com.vaadin.flow.router.*;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.server.InitialPageSettings;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.PageConfigurator;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.material.Material;
-import de.berlin.htw.mueller.frontend.routes.SongView;
+
 
 /**
- * A sample Vaadin view class.
- * <p>
- * To implement a Vaadin view just extend any Vaadin component and
- * use @Route annotation to announce it in a URL as a Spring managed
- * bean.
- * Use the @PWA annotation make the application installable on phones,
- * tablets and some desktop browsers.
- * <p>
- * A new instance of this class is created for every new user and every
- * browser tab/window.
+ * Representation for the layout of the app.
+ * It handles PWA attributes and constructs the footer.
  */
 @Push
 @Route
@@ -45,6 +40,9 @@ public class MainLayout extends FlexLayout implements PageConfigurator, BeforeEn
     private final Footer footer;
     private final Button backButton;
 
+    /**
+     * Basic constructor for the main layout.
+     */
     public MainLayout() {
 
         setWidthFull();
@@ -68,12 +66,20 @@ public class MainLayout extends FlexLayout implements PageConfigurator, BeforeEn
         footer.add(backButton, privacyButton, imprintButton);
     }
 
+    /**
+     * Disables the standard loading indicator for the application.
+     * @param settings are page settings.
+     */
     @Override
     public void configurePage(InitialPageSettings settings) {
         LoadingIndicatorConfiguration conf = settings.getLoadingIndicatorConfiguration();
         conf.setApplyDefaultTheme(false);
     }
 
+    /**
+     * Ensures that the back button in the footer only works if a user is in the SongView.
+     * @param event is an event that can be used to determine the navigation target of the user.
+     */
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         if(event.getNavigationTarget() == SongView.class)
