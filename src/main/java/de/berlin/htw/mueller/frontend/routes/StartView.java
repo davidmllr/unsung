@@ -42,8 +42,7 @@ public class StartView extends VerticalLayout {
     private final Twitter twitter;
     private final Spotify spotify;
 
-    @Value("${twitter.redirect-uri}")
-    private String twitterRedirectUri;
+    private final String twitterRedirectUri;
 
     private final Logger logger = LoggerFactory.getLogger(StartView.class);
 
@@ -51,13 +50,18 @@ public class StartView extends VerticalLayout {
      * Basic constructor for the view.
      * @param processor is a reference to the Processor component.
      * @param spotify is a reference to the Spotify component.
+     * @param twitterRedirectUri is the value for the Twitter redirect URI.
      */
     @Autowired
     public StartView(Processor processor,
-                     Spotify spotify) {
+                     Spotify spotify,
+                     @Value("${twitter.redirect-uri}") String twitterRedirectUri) {
+
         this.processor = processor;
         this.twitter = getTwitter();
         this.spotify = spotify;
+
+        this.twitterRedirectUri = twitterRedirectUri;
 
         Object obj = VaadinSession.getCurrent().getAttribute("authorize.action");
         if(obj != null && (Boolean) obj) authorizeTwitter();
