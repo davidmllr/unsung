@@ -2,6 +2,7 @@ package de.berlin.htw.mueller.frontend.components;
 
 import com.azure.ai.textanalytics.models.DocumentSentiment;
 import com.azure.ai.textanalytics.models.SentimentConfidenceScores;
+import com.azure.ai.textanalytics.models.TextSentiment;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.html.Div;
 
@@ -23,9 +24,12 @@ public class SentimentDetails extends Div {
         this.sentiment = sentiment;
         setClassName("tweet-sentiment-details");
 
-
+        TextSentiment textSentiment = sentiment.getSentiment();
         double score = getHighestConfidenceScore();
-        Html html = new Html("<p>This tweet is <b>" + sentiment.getSentiment() + "</b> with a probability of <b>" + score + "</b></p>");
+        String str = textSentiment == TextSentiment.MIXED ?
+                "<p>This tweet has a <b>" + textSentiment + "</b> sentiment.</p>" :
+                "<p>This tweet is <b>" + textSentiment + "</b> with a probability of <b>" + score + "</b></p>";
+        Html html = new Html(str);
         add(html);
     }
 

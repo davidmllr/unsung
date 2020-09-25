@@ -80,11 +80,11 @@ public class SongView extends VerticalLayout {
             analysisDiv.setVisible(!analysisDiv.isVisible());
         });
 
-        String str = MessageFormat.format("Out of your last twenty tweets and/or retweets, {0,number} tweets were positive, {1,number} were negative and {2,number} were neutral.",
+        String str = MessageFormat.format("Out of your last twenty Tweets and/or Retweets, {0,number} Tweet(s) were positive, {1,number} were negative and {2,number} were neutral.",
                 result.getPositive(), result.getNegative(), result.getNeutral());
 
         if (result.getMixed() > 0.0f)
-            str += MessageFormat.format(" ({3,number} tweets sent mixed messages.)", result.getMixed());
+            str += MessageFormat.format(" {0,number} Tweet(s) sent mixed messages.", result.getMixed());
 
         String other = MessageFormat.format("Based on this, we figured you might like a song that is about {0,number,#.##%} valent, {1,number,#.##%} danceable and has around {2,number,#.##%} energy.",
                 result.getPositiveRatio(), result.getNegativeRatio(), result.getNeutralRatio(), result.getMixedRatio());

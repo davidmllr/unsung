@@ -37,6 +37,7 @@ public class TweetPresenter extends Component implements HasComponents {
         overlay.setClassName("tweet-overlay");
         tweetContainer.setClassName("tweet-container");
         Tweet tweet = new Tweet(String.valueOf(status.getId()));
+        tweet.setHeight("425px");
         tweetContainer.add(tweet);
 
         SentimentDetails details = new SentimentDetails(sentiment);

@@ -69,7 +69,7 @@ public class Processor {
             if(Objects.equals(sentiment, TextSentiment.POSITIVE)) positive++;
             else if(Objects.equals(sentiment, TextSentiment.NEGATIVE)) negative++;
             else if(Objects.equals(sentiment, TextSentiment.NEUTRAL)) neutral++;
-            else if(Objects.equals(sentiment, TextSentiment.MIXED)) positive++;
+            else if(Objects.equals(sentiment, TextSentiment.MIXED)) mixed++;
 
         }
 
